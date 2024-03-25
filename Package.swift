@@ -10,9 +10,9 @@ let GUILinkerSettings: [LinkerSetting] = [
 ]
 
 let package = Package(
-    name: "windows-samples",
+    name: "knuter",
     products: [
-        .executable(name: "WinUI3AnimationsPreview", targets: ["WinUI3AnimationsPreview"]),
+        .executable(name: "Knuter", targets: ["Knuter"]),
     ],
     dependencies: [
         .package(url: "https://github.com/thebrowsercompany/swift-windowsappsdk", branch: "main"),
@@ -21,13 +21,13 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "WinUI3AnimationsPreview",
+            name: "Knuter",
             dependencies: [
                 .product(name: "WinUI", package: "swift-winui"),
                 .product(name: "WinAppSDK", package: "swift-windowsappsdk"),
                 .product(name: "WindowsFoundation", package: "swift-windowsfoundation"),
             ],
-            path:"WinUI3AnimationsPreview",
+            path:"Knuter",
             linkerSettings: GUILinkerSettings
         ),
     ]
