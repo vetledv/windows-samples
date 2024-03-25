@@ -1,8 +1,14 @@
 import Foundation
+
+import Observation
+
 import UWP
+
 import WinAppSDK
-import WindowsFoundation
+
 import WinUI
+
+import WindowsFoundation
 
 @main
 public class PreviewApp: SwiftApplication {
@@ -11,14 +17,15 @@ public class PreviewApp: SwiftApplication {
     /// in your application.
     public required init() {
         super.init()
-        unhandledException.addHandler { (_, args:UnhandledExceptionEventArgs!) in
+        unhandledException.addHandler { (_, args: UnhandledExceptionEventArgs!) in
             print("Unhandled exception: \(args.message)")
         }
     }
+    let h = Hello.shared
 
     /// onShutdown is called once Application.start returns. This is a good place to do any cleanup
     /// that is necessary for your application before it terminates.
-    override public func onShutdown() {    }
+    override public func onShutdown() {}
 
     /// onLaunched is called when the application is launched. This is the main entry point for your
     /// application and when you can create a window and display UI.s
@@ -29,7 +36,7 @@ public class PreviewApp: SwiftApplication {
         try! window.activate()
 
         let animatableButton = Button()
-        animatableButton.content = "Hello World"
+        animatableButton.content = h.asd
 
         animatableButton.pointerEntered.addHandler { [weak self] in
             guard let self else { return }
@@ -56,10 +63,12 @@ public class PreviewApp: SwiftApplication {
         window.content = panel
     }
 
-    lazy var compositor: WinAppSDK.Compositor = WinUI.CompositionTarget.getCompositorForCurrentThread()
+    lazy var compositor: WinAppSDK.Compositor = WinUI.CompositionTarget
+        .getCompositorForCurrentThread()
     lazy var springAnimation: WinAppSDK.SpringVector3NaturalMotionAnimation = {
         // swiftlint:disable:next force_try
-        let animation: WinAppSDK.SpringVector3NaturalMotionAnimation = try! compositor.createSpringVector3Animation()
+        let animation: WinAppSDK.SpringVector3NaturalMotionAnimation =
+            try! compositor.createSpringVector3Animation()
         animation.target = "Scale"
         animation.dampingRatio = 0.6
         animation.period = TimeSpan(duration: 500000)
