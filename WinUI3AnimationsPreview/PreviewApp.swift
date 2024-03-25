@@ -68,7 +68,7 @@ public class PreviewApp: SwiftApplication {
 
     private func elementPointerEntered(sender: Any!, args: PointerRoutedEventArgs!) {
         // Scale up to 1.5
-        springAnimation.finalValue = Vector3(x: 1.5, y: 1.5, z: 1.5)
+        springAnimation.finalValue = Vector3(x: 1.1, y: 1.1, z: 1.1)
         // swiftlint:disable:next force_cast
         let senderAsUElement = sender as! UIElement
         try? senderAsUElement.startAnimation(springAnimation)
