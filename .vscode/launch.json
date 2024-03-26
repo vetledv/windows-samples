@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:windows-samples}",
+            "name": "Debug Knuter",
+            "program": "${workspaceFolder:windows-samples}\\.build\\debug\\Knuter.exe",
+            "preLaunchTask": "swift: Build Debug Knuter"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:windows-samples}",
+            "name": "Release Knuter",
+            "program": "${workspaceFolder:windows-samples}\\.build\\release\\Knuter.exe",
+            "preLaunchTask": "swift: Build Release Knuter"
+        }
+    ]
+}
