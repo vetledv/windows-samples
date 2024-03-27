@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/thebrowsercompany/swift-windowsappsdk", branch: "main"),
         .package(url: "https://github.com/thebrowsercompany/swift-windowsfoundation", branch: "main"),
-        .package(url: "https://github.com/thebrowsercompany/swift-winui", branch: "main"),
+        .package(url: "https://github.com/vetledv/swift-winui", branch: "main"),
     ],
     targets: [
         .executableTarget(
