@@ -12,6 +12,8 @@ final class MainPage: Page {
     override init() {
         super.init()
         self.content = self.stackPanel
+        self.tag = "MainPage"
+        self.name = "MainPage"
     }
 
     var h = Hello.shared
@@ -34,7 +36,6 @@ final class MainPage: Page {
         return button
     }()
 }
-
 extension Button {
     //taken from https://github.com/thebrowsercompany/windows-samples/issues/14#issuecomment-1977398567
     func updateContent(_ content: @escaping () -> String) {

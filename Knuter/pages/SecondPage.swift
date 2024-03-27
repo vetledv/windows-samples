@@ -8,6 +8,8 @@ final class SecondPage: Page {
     override init() {
         super.init()
         self.content = self.stackPanel
+        self.tag = "SecondPage"
+        self.name = "SecondPage"
     }
 
     lazy var stackPanel = {

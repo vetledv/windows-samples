@@ -8,13 +8,37 @@ import WinUI
 
 import WindowsFoundation
 
-@_spi(WinRTImplements) import WindowsFoundation
-
 final class KnuterNavView: NavigationView {
     override init() {
         super.init()
         self.setup()
     }
+
+    lazy var contentFrame = {
+        let frame = Frame()
+        frame.name = "content-frame"
+        return frame
+    }()
+
+    lazy var settingsPage: SettingsPage = .init()
+    lazy var mainPage: MainPage = .init()
+    lazy var secondPage: SecondPage = .init()
+
+    lazy var mainPageNavItem = {
+        let navItem = NavigationViewItem()
+        navItem.name = "n-home"
+        navItem.tag = String("MainPage")
+        navItem.content = "Home"
+        return navItem
+    }()
+
+    lazy var secondPageNavItem = {
+        let navItem = NavigationViewItem()
+        navItem.name = "n-second"
+        navItem.tag = String("SecondPage")
+        navItem.content = "Second"
+        return navItem
+    }()
 
     func setup() {
         self.paneTitle = "Nav"
@@ -29,9 +53,10 @@ final class KnuterNavView: NavigationView {
         self.selectedItem = self.menuItems[0]
         self.header = "Home"
 
+        self.contentFrame.content = self.mainPage
+
         self.selectionChanged.addHandler { [weak self] (v, a) in
             //TODO: figure out how to do navigation properly
-
             guard
                 let cf = self?.contentFrame,
                 let view = v,
@@ -39,46 +64,40 @@ final class KnuterNavView: NavigationView {
             else { return }
 
             if args.isSettingsSelected {
+                cf.content = self?.settingsPage
+                // self?.navigate(self?.settingsPage, args)
                 view.header = "Settings"
-                cf.content = SettingsPage()
                 return
             }
 
             guard let item = view.selectedItem as? NavigationViewItem else { return }
-            
-            if item.name == self?.mainPageNavItem.name {
+            switch item.name {
+            case self?.mainPageNavItem.name:
+                cf.content = self?.mainPage
+                // self?.navigate(self?.mainPage, args)
                 view.header = "Home"
-                cf.content = MainPage()
-                return
-            }
-            if item.name == self?.secondPageNavItem.name {
+            case self?.secondPageNavItem.name:
+                cf.content = self?.secondPage
+                // self?.navigate(self?.secondPage, args)
                 view.header = "Second"
-                cf.content = SecondPage()
+            default:
                 return
+
             }
+            return
         }
     }
 
-    lazy var mainPageNavItem = {
-        let navItem = NavigationViewItem()
-        navItem.name = "n-home"
-        navItem.tag = String("n-home")
-        navItem.content = "Home"
-        return navItem
-    }()
-
-    lazy var secondPageNavItem = {
-        let navItem = NavigationViewItem()
-        navItem.name = "n-second"
-        navItem.tag = String("n-second")
-        navItem.content = "Second"
-        return navItem
-    }()
-
-    lazy var contentFrame = {
-        let frame = Frame()
-        frame.tag = "content-view"
-        frame.content = MainPage()
-        return frame
-    }()
+    func navigate(_ page: Page?, _ args: NavigationViewSelectionChangedEventArgs) {
+        guard let page = page else { return }
+        do {
+            let _ = try self.contentFrame.navigate(
+                page.getTypeName(),
+                nil,
+                args.recommendedNavigationTransitionInfo
+            )
+        } catch {
+            debugPrint("\(page.name) nav error: \(error)")
+        }
+    }
 }
