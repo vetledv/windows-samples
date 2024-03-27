@@ -9,6 +9,15 @@ class ContentView: Window {
         self.setup()
     }
 
+    lazy var navigationView = {
+        let view = NavigationView()
+        view.paneTitle = "Knuter"
+        view.paneDisplayMode = .left
+        view.isBackButtonVisible = .auto
+        view.content = self.mainFrame
+        return view
+    }()
+
     lazy var mainFrame = {
         let frame = Frame()
         frame.content = self.stackPanel
@@ -38,7 +47,7 @@ class ContentView: Window {
 
         self.title = "Knuter"
         self.extendsContentIntoTitleBar = true
-        self.content = self.mainFrame
+        self.content = self.navigationView
         self.systemBackdrop = backdrop
     }
 }
