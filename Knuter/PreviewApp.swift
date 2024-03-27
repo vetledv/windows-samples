@@ -11,7 +11,7 @@ import WinUI
 import WindowsFoundation
 
 @main
-public class PreviewApp: SwiftApplication {
+public class KnuterApp: SwiftApplication {
 
     lazy var window: ContentView = .init()
 
