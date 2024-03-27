@@ -7,7 +7,6 @@ import WindowsFoundation
 final class SettingsPage: Page {
     override init() {
         super.init()
-        self.tag = "settings"
         self.content = self.canvas
     }
 
