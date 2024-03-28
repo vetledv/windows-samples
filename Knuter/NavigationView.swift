@@ -8,6 +8,8 @@ import WinUI
 
 import WindowsFoundation
 
+import WinSDK
+
 final class KnuterNavView: NavigationView {
     override init() {
         super.init()
@@ -43,8 +45,9 @@ final class KnuterNavView: NavigationView {
     func setup() {
         self.paneTitle = "Nav"
         self.paneDisplayMode = .left
-        self.isBackButtonVisible = .auto
-
+        self.isBackButtonVisible = .init(0)
+        self.isBackEnabled = false
+        
         self.menuItems.append(self.mainPageNavItem)
         self.menuItems.append(self.secondPageNavItem)
         self.content = self.contentFrame
@@ -53,8 +56,8 @@ final class KnuterNavView: NavigationView {
         self.selectedItem = self.menuItems[0]
         self.header = "Home"
 
-        self.contentFrame.content = self.mainPage
-
+        // self.contentFrame.content = self.mainPage
+        
         self.selectionChanged.addHandler { [weak self] (v, a) in
             //TODO: figure out how to do navigation properly
             guard
@@ -62,7 +65,6 @@ final class KnuterNavView: NavigationView {
                 let view = v,
                 let args = a
             else { return }
-
             if args.isSettingsSelected {
                 cf.content = self?.settingsPage
                 // self?.navigate(self?.settingsPage, args)
@@ -82,7 +84,6 @@ final class KnuterNavView: NavigationView {
                 view.header = "Second"
             default:
                 return
-
             }
             return
         }

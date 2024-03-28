@@ -16,7 +16,7 @@ final class MainPage: Page {
         self.name = "MainPage"
     }
 
-    var h = Hello.shared
+    let h = Hello.shared
 
     lazy var stackPanel = {
         let stackPanel = StackPanel()
