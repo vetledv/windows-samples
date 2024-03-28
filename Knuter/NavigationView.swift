@@ -61,12 +61,12 @@ final class KnuterNavView: NavigationView {
         self.selectionChanged.addHandler { [weak self] (v, a) in
             //TODO: figure out how to do navigation properly
             guard
-                let cf = self?.contentFrame,
+                let self, 
                 let view = v,
                 let args = a
             else { return }
             if args.isSettingsSelected {
-                cf.content = self?.settingsPage
+                self.content = self.settingsPage
                 // self?.navigate(self?.settingsPage, args)
                 view.header = "Settings"
                 return
@@ -74,12 +74,12 @@ final class KnuterNavView: NavigationView {
 
             guard let item = view.selectedItem as? NavigationViewItem else { return }
             switch item.name {
-            case self?.mainPageNavItem.name:
-                cf.content = self?.mainPage
+            case self.mainPageNavItem.name:
+                self.content = self.mainPage
                 // self?.navigate(self?.mainPage, args)
                 view.header = "Home"
-            case self?.secondPageNavItem.name:
-                cf.content = self?.secondPage
+            case self.secondPageNavItem.name:
+                self.content = self.secondPage
                 // self?.navigate(self?.secondPage, args)
                 view.header = "Second"
             default:
